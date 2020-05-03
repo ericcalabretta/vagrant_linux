@@ -1,28 +1,23 @@
----
 driver:
   name: vagrant
-
-## The forwarded_port port feature lets you connect to ports on the VM guest via
-## localhost on the host.
-## see also: https://www.vagrantup.com/docs/networking/forwarded_ports.html
-
-#  network:
-#    - ["forwarded_port", {guest: 80, host: 8080}]
+  # Air-gap settings to pull box from internal repo
+  # box: centoss-7-v202002.04.0
+  # box_url: http://34.223.67.135:8081/artifactory/example-repo-local/centoss-7-v202002.04.0.box
+  # box_download_insecure: True
+  synced_folders:
+    - ["./scripts", "/tmp"]
 
 provisioner:
   name: chef_zero
-
-  ## product_name and product_version specifies a specific Chef product and version to install.
-  ## see the Chef documentation for more details: https://docs.chef.io/config_yml_kitchen.html
-  #  product_name: chef
-  #  product_version: 15
-
+  
 verifier:
   name: inspec
 
 platforms:
-  - name: ubuntu-18.04
   - name: centos-7
+    lifecycle:
+      post_create:
+        remote: '/tmp/install.sh'
 
 suites:
   - name: default

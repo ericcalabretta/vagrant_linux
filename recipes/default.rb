@@ -1,5 +1,4 @@
-#
-# Cookbook:: vagrant_linux
-# Recipe:: default
-#
-# Copyright:: 2020, The Authors, All Rights Reserved.
+file '/tmp/test.txt' do
+    content 'test'
+    action :create
+end
