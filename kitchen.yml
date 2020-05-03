@@ -16,7 +16,7 @@ verifier:
 platforms:
   - name: centos-7
     lifecycle:
-      post_create:
+      pre_converge:
         remote: '/tmp/install.sh'
 
 suites:
